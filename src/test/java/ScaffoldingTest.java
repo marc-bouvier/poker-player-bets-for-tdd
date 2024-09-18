@@ -83,6 +83,18 @@ public class ScaffoldingTest {
     }
 
     // What is in the request
+// Given we have a aces put more money
+    @Test
+    void given_we_have_a_aces_put_more_money() throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode request = mapper.readTree(exampleRequest);
+        assertThat(betRequest(request)).isGreaterThanOrEqualTo(1000);
+    }
+    // We need to know : our hand
+    // We nedd to know others current bets
+    // we want bet higher
+
 
 
 }
