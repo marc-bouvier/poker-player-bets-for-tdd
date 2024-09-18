@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -37,8 +38,10 @@ public class Player {
         var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         var faceCards = Set.of("A", "K", "J", "Q", "10");
+//        var communityCards = Set.of("10","9", "8", "7", "6", "5", "4", "3", "2");
+//
 
-
+        var communityCards = state.community_cards;
         if (us.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("A")).toList().size() == 1) {
@@ -53,6 +56,16 @@ public class Player {
 
         }
 
+
+        if (us.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> communityCards.stream()
+                        .filter(card -> card.rank.equals(o))
+                        .toList().size()>0).toList().size() == 1) {
+            return state.currentMaxBet() + (state.allBetsSum());
+        }
+
+//        community
 
 
         if (randomNumber >= 50) {

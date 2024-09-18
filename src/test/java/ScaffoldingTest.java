@@ -229,9 +229,10 @@ public class ScaffoldingTest {
 
 
     @Test
-    void does_no_all_in_wirh_k_7() {
+    void checks_with_k_7() {
 
         var game = new GameState();
+        game.community_cards=List.of();
         PlayerRecord us = new PlayerRecord()
                 .setName("Bets for TDD")
                 .setBet(20)
@@ -248,6 +249,39 @@ public class ScaffoldingTest {
         );
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(30);
+
+    }
+
+
+    @Test
+    void post_flop_put_money_in_with_good_hand() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("8").setSuit("clubs"),
+                        new Card().setRank("10").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000)
+
+                )
+        );
+
+        game.community_cards = List.of(
+                new Card().setRank("6").setSuit("clubs"),
+                new Card().setRank("10").setSuit("hearts"),
+                new Card().setRank("3").setSuit("diamonds")
+        );
+
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
     }
 

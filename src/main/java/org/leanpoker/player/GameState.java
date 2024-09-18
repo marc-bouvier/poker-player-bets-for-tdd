@@ -10,7 +10,7 @@ public final class GameState {
     public float big_blind;
     public float orbits;
     public float dealer;
-    public List<Object> community_cards;
+    public List<PlayerRecord.Card> community_cards;
     public float current_buy_in;
     public float pot;
     public float in_action;
@@ -88,7 +88,7 @@ public final class GameState {
         return this;
     }
 
-    public GameState setCommunity_cards(List<Object> community_cards) {
+    public GameState setCommunity_cards(List<PlayerRecord.Card> community_cards) {
         this.community_cards = community_cards;
         return this;
     }
