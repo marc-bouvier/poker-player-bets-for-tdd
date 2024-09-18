@@ -1,6 +1,7 @@
 package org.leanpoker.player;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.micronaut.http.MediaType;
@@ -27,7 +28,9 @@ public class PlayerController {
         String action = body.get("action");
         String gameState = body.get("game_state");
         if ("bet_request".equals(action)) {
-            return String.valueOf(Player.betRequest(mapper.readTree(gameState)));
+            JsonNode request = mapper.readTree(gameState);
+            System.out.println("------> Game JSON = " + request.toString());
+            return String.valueOf(Player.betRequest(request));
         }
         if ("showdown".equals(action)) {
             Player.showdown(mapper.readTree(gameState));

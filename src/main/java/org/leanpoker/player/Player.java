@@ -15,11 +15,10 @@ public class Player {
     public static int betRequest(JsonNode request) {
         try {
             GameState state = mapper.readValue(request.toPrettyString(), GameState.class);
-            // detect aces
             Integer x = playerAction(state, 49);
 
             if (x != null) return x;
-            System.out.println("INFO: " + state);
+//            System.out.println("INFO: " + state);
             return state.currentMaxBet() + (state.allBetsSum());
         } catch (JsonProcessingException e) {
             System.out.println("ERROR: " + e);
