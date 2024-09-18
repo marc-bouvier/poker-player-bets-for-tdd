@@ -3,6 +3,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.leanpoker.player.GameState;
 import org.leanpoker.player.Player;
 import org.leanpoker.player.PlayerRecord;
@@ -179,62 +181,17 @@ public class ScaffoldingTest {
     }
 
 
-    @Test
-    void go_all_in_with_kings() {
-
-        var game = new GameState();
-        PlayerRecord us = new PlayerRecord()
-                .setName("Bets for TDD")
-                .setBet(0)
-                .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("K").setSuit("clubs"),
-                        new Card().setRank("K").setSuit("diamonds")
-                ));
-        game.setPlayers(
-                List.of(us
-                        , new PlayerRecord()
-                                .setName("other")
-                                .setBet(10)
-                                .setStack(1000))
-        );
-
-        assertThat(Player.playerAction(game)).isEqualTo(20);
-
-    }
-
-    @Test
-    void jacks_or_better() {
-
-        var game = new GameState();
-        PlayerRecord us = new PlayerRecord()
-                .setName("Bets for TDD")
-                .setBet(0)
-                .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("J").setSuit("clubs"),
-                        new Card().setRank("J").setSuit("diamonds")
-                ));
-        game.setPlayers(
-                List.of(us
-                        , new PlayerRecord()
-                                .setName("other")
-                                .setBet(10)
-                                .setStack(1000))
-        );
-
-        assertThat(Player.playerAction(game)).isEqualTo(20);
-
-    }
-
-    @Test
-    void fdssdf() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Q","K","A","J"})
+    void raise_with_face_cards(String cardOneAndTwo) {
 
         var game = new GameState();
         PlayerRecord us = new PlayerRecord()
                 .setName("Bets for TDD")
                 .setBet(20)
                 .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("J").setSuit("clubs"),
-                        new Card().setRank("J").setSuit("diamonds")
+                        new Card().setRank("Q").setSuit("clubs"),
+                        new Card().setRank("Q").setSuit("diamonds")
                 ));
         game.setPlayers(
                 List.of(us

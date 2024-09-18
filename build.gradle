@@ -29,7 +29,9 @@ dependencies {
     implementation("io.micronaut:micronaut-jackson-databind")
     runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation 'org.assertj:assertj-core:3.21.0'
-
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-params:5.8.2'
+    )
 }
 
 graalvmNative.toolchainDetection = false
