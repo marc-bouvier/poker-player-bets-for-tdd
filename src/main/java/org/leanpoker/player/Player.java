@@ -26,7 +26,7 @@ public class Player {
     }
 
     public static Integer playerAction(GameState state) {
-        var us = state.players().stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
+        var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         if (us.hole_cards.stream()
                 .map(hand -> hand.rank)
