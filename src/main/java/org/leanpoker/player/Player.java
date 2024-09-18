@@ -57,11 +57,12 @@ public class Player {
         }
 
 
-        if (us.hole_cards.stream()
+        boolean one_or_two_pairs = us.hole_cards.stream()
                 .map(hand -> hand.rank)
-                .filter(o -> communityCards.stream()
+                .filter(o -> !communityCards.stream()
                         .filter(card -> card.rank.equals(o))
-                        .toList().size()>0).toList().size() == 1) {
+                        .toList().isEmpty()).toList().size() == 1;
+        if (one_or_two_pairs) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
 
