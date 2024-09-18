@@ -32,6 +32,8 @@ public class Player {
     }
 
     public static Integer playerAction(GameState state, int randomNumber) {
+
+
         var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         var faceCards = Set.of("A", "K", "J", "Q");
@@ -41,8 +43,10 @@ public class Player {
             return state.currentMaxBet() + (state.allBetsSum());
 
         }
-
-        return null;
+        if (randomNumber >= 50) {
+            return state.currentMaxBet() + (state.allBetsSum());
+        }
+        return state.currentMaxBet() ; // check
     }
 
     public static void showdown(JsonNode game) {
