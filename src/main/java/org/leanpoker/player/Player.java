@@ -36,27 +36,17 @@ public class Player {
     public static Integer playerAction(GameState state, int randomNumber) {
 
 
-      var teamBetForTdd = state.players.stream()
-              .filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
+        var teamBetForTdd = state.players.stream()
+                .filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         var faceCards = Set.of("A", "K", "J", "Q", "10");
 //        var communityCards = Set.of("10","9", "8", "7", "6", "5", "4", "3", "2");
 //
 
         var communityCards = state.community_cards;
-        if (teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("A")).toList().size() == 1) {
-            return state.currentMaxBet() + (state.allBetsSum());
 
-        }
-
-        if (teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .allMatch(o -> faceCards.contains(o))) {
-            return state.currentMaxBet() + (state.allBetsSum());
-
-        }
+        Integer currentBet = preFlop(state, teamBetForTdd, faceCards);
+        if (currentBet != null) return currentBet;
 
         // post flop
 
@@ -71,6 +61,24 @@ public class Player {
             return state.currentMaxBet() + (state.allBetsSum());
         }
         return state.currentMaxBet(); // check
+    }
+
+    private static Integer preFlop(GameState state, PlayerRecord teamBetForTdd, Set<String> faceCards) {
+        Integer currentBet = null;
+        if (teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("A")).toList().size() == 1) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
+
+        }
+
+        if (teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .allMatch(o -> faceCards.contains(o))) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
+
+        }
+        return currentBet;
     }
 
     private static Integer postFlopPlay(GameState state, PlayerRecord us, List<PlayerRecord.Card> communityCards) {
