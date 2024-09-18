@@ -79,66 +79,6 @@ public class ScaffoldingTest {
             "  \"minimum_raise\": 5,\n" +
             "  \"bet_index\": 3\n" +
             "}";
-
-    // Null case
-    @Test
-    void betRequest_always_zero_or_greater(
-    ) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode request = mapper.readTree(exampleRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(0);
-    }
-
-    // What is in the request
-// Given we have a aces put more money
-    @Test
-    void given_we_have_a_aces_put_more_money() throws JsonProcessingException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode request = mapper.readTree(exampleRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(1000);
-    }
-
-
-    @Test
-    void add_ten_to_the_current_bet() throws JsonProcessingException {
-
-
-        ObjectMapper mapper = new ObjectMapper();
-
-
-        JsonNode request = mapper.readTree(bluffingRequest);
-        assertThat(betRequest(request)).isEqualTo(25);
-
-
-    }
-
-
-    @Test
-    void go_all_in_with_kings() throws JsonProcessingException {
-
-        var game = new GameState();
-        PlayerRecord us = new PlayerRecord()
-                .setName("Bets for TDD")
-                .setBet(0)
-                .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("K").setSuit("clubs"),
-                        new Card().setRank("K").setSuit("diamonds")
-                ));
-        game.setPlayers(
-                List.of(us
-                        , new PlayerRecord()
-                                .setName("other")
-                                .setBet(10)
-                                .setStack(1000))
-        );
-
-        assertThat(Player.playerAction(game)).isEqualTo(1000);
-
-    }
-
-// The current bet size and add 100
-
     private final String bluffingRequest = "{\n" +
             "  \"tournament_id\": \"66eab3c4fd273a00027d91df\",\n" +
             "  \"game_id\": \"66eae9100101350002fbfd88\",\n" +
@@ -202,6 +142,90 @@ public class ScaffoldingTest {
             "  \"minimum_raise\": 5,\n" +
             "  \"bet_index\": 3\n" +
             "}";
+
+
+
+    // Null case
+    @Test
+    void betRequest_always_zero_or_greater(
+    ) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode request = mapper.readTree(exampleRequest);
+        assertThat(betRequest(request)).isGreaterThanOrEqualTo(0);
+    }
+
+    // What is in the request
+// Given we have a aces put more money
+    @Test
+    void given_we_have_a_aces_put_more_money() throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode request = mapper.readTree(exampleRequest);
+        assertThat(betRequest(request)).isGreaterThanOrEqualTo(1000);
+    }
+
+
+    @Test
+    void add_ten_to_the_current_bet() throws JsonProcessingException {
+
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        JsonNode request = mapper.readTree(bluffingRequest);
+        assertThat(betRequest(request)).isEqualTo(25);
+
+
+    }
+
+
+    @Test
+    void go_all_in_with_kings() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(0)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("K").setSuit("clubs"),
+                        new Card().setRank("K").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(10)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game)).isEqualTo(1000);
+
+    }
+
+    @Test
+    void jacks_or_better() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(0)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("J").setSuit("clubs"),
+                        new Card().setRank("J").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(10)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game)).isEqualTo(1000);
+
+    }
+
+// The current bet size and add 100
 
 
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Set;
+
 public class Player {
 
 
@@ -30,17 +32,13 @@ public class Player {
     public static Integer playerAction(GameState state) {
         var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
+        var faceCards = Set.of("A", "K", "J", "Q");
         if (us.hole_cards.stream()
                 .map(hand -> hand.rank)
-                .allMatch(o -> o.equals("A"))) {
+                .allMatch(o -> faceCards.contains(o))) {
             return 1000;
         }
-        if (us.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .allMatch(o -> o.equals("K"))) {
-            return 1000;
 
-        }
         return null;
     }
 
