@@ -39,11 +39,11 @@ public class ScaffoldingTest {
             "      \"bet\": 0,\n" +
             "      \"hole_cards\": [\n" +
             "        {\n" +
-            "          \"rank\": \"K\",\n" +
+            "          \"rank\": \"A\",\n" +
             "          \"suit\": \"clubs\"\n" +
             "        },\n" +
             "        {\n" +
-            "          \"rank\": \"Q\",\n" +
+            "          \"rank\": \"A\",\n" +
             "          \"suit\": \"diamonds\"\n" +
             "        }\n" +
             "      ],\n" +
