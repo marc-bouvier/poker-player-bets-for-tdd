@@ -8,8 +8,8 @@ public class Player {
 
     public static int betRequest(JsonNode request) {
         var game_id = request.get("game_id").asText();
-        GameState state = new GameState("gam1e_id");
-        System.out.println(request);
+        GameState state = new GameState(game_id);
+        System.out.println("INFO: " + state);
         return 1;
 
     }
