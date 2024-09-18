@@ -16,7 +16,7 @@ public class Player {
         try {
             GameState state = mapper.readValue(request.toPrettyString(), GameState.class);
             // detect aces
-            Integer x = playerAction(state);
+            Integer x = playerAction(state, 49);
 
             if (x != null) return x;
             System.out.println("INFO: " + state);
@@ -29,7 +29,7 @@ public class Player {
 
     }
 
-    public static Integer playerAction(GameState state) {
+    public static Integer playerAction(GameState state, int randomNumber) {
         var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         var faceCards = Set.of("A", "K", "J", "Q");

@@ -1,7 +1,6 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -201,10 +200,35 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
 
-        assertThat(Player.playerAction(game)).isEqualTo(80);
+        assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
     }
 
+    @Test
+    void fold_when_(){
+        // 1-100
+        // if lower than 50 we fold
+        // if higher we raise
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("Q").setSuit("clubs"),
+                        new Card().setRank("Q").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(80);
+
+    }
 // The current bet size and add 100
 
 
