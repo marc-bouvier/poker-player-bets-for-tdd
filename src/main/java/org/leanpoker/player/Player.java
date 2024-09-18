@@ -16,7 +16,7 @@ public class Player {
             Integer x = playerAction(state);
             if (x != null) return x;
             System.out.println("INFO: " + state);
-            return state.currentMaxBet() + 10;
+            return state.currentMaxBet() +( state.allBetsSum());
         } catch (JsonProcessingException e) {
             System.out.println("ERROR: " + e);
         }

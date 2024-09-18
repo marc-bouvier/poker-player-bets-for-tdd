@@ -27,5 +27,12 @@ public record GameState(
                 .mapToInt(playerRecord -> Integer.parseInt(playerRecord.bet)).max().orElse(100);
     }
 
+
+    public int allBetsSum() {
+        return players.stream()
+//                .filter(playerRecord -> !playerRecord.name.equals("Bets for TDD"))
+                .mapToInt(playerRecord -> Integer.parseInt(playerRecord.bet)).sum();
+    }
+
 }
 

@@ -92,20 +92,20 @@ public class ScaffoldingTest {
         JsonNode request = mapper.readTree(exampleRequest);
         assertThat(betRequest(request)).isGreaterThanOrEqualTo(1000);
     }
+
     // We need to know : our hand
     // We nedd to know others current bets
     // we want bet higher
-    @Disabled
-    @Test
-    void given_we_facing_a_raise_we_raise_back() throws JsonProcessingException {
-
-
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode request = mapper.readTree(bluffingRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(100 );
-
-
-    }
+//    @Test
+//    void given_we_facing_a_raise_we_raise_back() throws JsonProcessingException {
+//
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        JsonNode request = mapper.readTree(bluffingRequest);
+//        assertThat(betRequest(request)).isGreaterThanOrEqualTo(100);
+//
+//
+//    }
 
     @Test
     void add_ten_to_the_current_bet() throws JsonProcessingException {
@@ -113,7 +113,7 @@ public class ScaffoldingTest {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode request = mapper.readTree(bluffingRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(20 );
+        assertThat(betRequest(request)).isEqualTo(25);
 
 
     }
@@ -183,7 +183,6 @@ public class ScaffoldingTest {
             "  \"minimum_raise\": 5,\n" +
             "  \"bet_index\": 3\n" +
             "}";
-
 
 
 }
