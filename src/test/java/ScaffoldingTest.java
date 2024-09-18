@@ -161,7 +161,7 @@ public class ScaffoldingTest {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode request = mapper.readTree(exampleRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(1000);
+        assertThat(betRequest(request)).isGreaterThanOrEqualTo(25);
     }
 
 
@@ -198,7 +198,7 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
 
-        assertThat(Player.playerAction(game)).isEqualTo(1000);
+        assertThat(Player.playerAction(game)).isEqualTo(20);
 
     }
 
@@ -221,7 +221,30 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
 
-        assertThat(Player.playerAction(game)).isEqualTo(1000);
+        assertThat(Player.playerAction(game)).isEqualTo(20);
+
+    }
+
+    @Test
+    void fdssdf() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("J").setSuit("clubs"),
+                        new Card().setRank("J").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game)).isEqualTo(80);
 
     }
 

@@ -36,7 +36,8 @@ public class Player {
         if (us.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .allMatch(o -> faceCards.contains(o))) {
-            return 1000;
+            return state.currentMaxBet() + (state.allBetsSum());
+
         }
 
         return null;
