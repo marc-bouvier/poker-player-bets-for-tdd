@@ -13,6 +13,7 @@ public class PlayerRecord {
     public List<Card> hole_cards;
 
     public static class Card {
+        /** 2-10 and J,Q,K,A*/
         public String rank; // ": "A",
         public String suit; // ": "clubs"
 

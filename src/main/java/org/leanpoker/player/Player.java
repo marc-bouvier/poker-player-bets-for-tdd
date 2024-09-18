@@ -36,17 +36,29 @@ public class Player {
 
         var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
-        var faceCards = Set.of("A", "K", "J", "Q");
+        var faceCards = Set.of("A", "K", "J", "Q", "10");
+
+
+        if (us.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("A")).toList().size() == 1) {
+            return state.currentMaxBet() + (state.allBetsSum());
+
+        }
+
         if (us.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .allMatch(o -> faceCards.contains(o))) {
             return state.currentMaxBet() + (state.allBetsSum());
 
         }
+
+
+
         if (randomNumber >= 50) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
-        return state.currentMaxBet() ; // check
+        return state.currentMaxBet(); // check
     }
 
     public static void showdown(JsonNode game) {

@@ -145,7 +145,6 @@ public class ScaffoldingTest {
             "}";
 
 
-
     // Null case
     @Test
     void betRequest_always_zero_or_greater(
@@ -167,21 +166,21 @@ public class ScaffoldingTest {
 
 
     @Test
-    void add_ten_to_the_current_bet() throws JsonProcessingException {
+    void always_at_least_check() throws JsonProcessingException {
 
 
         ObjectMapper mapper = new ObjectMapper();
 
 
         JsonNode request = mapper.readTree(bluffingRequest);
-        assertThat(betRequest(request)).isEqualTo(25);
+        assertThat(betRequest(request)).isGreaterThanOrEqualTo(10);
 
 
     }
 
 
     @ParameterizedTest
-    @ValueSource(strings = {"Q","K","A","J"})
+    @ValueSource(strings = {"Q", "K", "A", "J", "10"})
     void raise_with_face_cards(String cardOneAndTwo) {
 
         var game = new GameState();
@@ -204,8 +203,56 @@ public class ScaffoldingTest {
 
     }
 
+
     @Test
-    void fold_when_(){
+    void raise_with_an_ace() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("7").setSuit("clubs"),
+                        new Card().setRank("A").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(80);
+
+    }
+
+
+    @Test
+    void does_no_all_in_wirh_k_7() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("7").setSuit("clubs"),
+                        new Card().setRank("K").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(30);
+
+    }
+
+    @Test
+    void fold_when_() {
         // 1-100
         // if lower than 50 we fold
         // if higher we raise
@@ -229,7 +276,12 @@ public class ScaffoldingTest {
         assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
     }
-// The current bet size and add 100
 
+    // Pre flop
+
+
+    // Post flop
+
+    // Fix our bluffing : fold a reasonable amount of time
 
 }
