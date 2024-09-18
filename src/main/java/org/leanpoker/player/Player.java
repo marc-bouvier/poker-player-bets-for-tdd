@@ -8,7 +8,7 @@ public class Player {
 
     public static int betRequest(JsonNode request) {
         System.out.println(request);
-        return 0;
+        return 1;
 
     }
 
