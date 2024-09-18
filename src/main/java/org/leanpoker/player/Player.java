@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Player {
 
@@ -35,44 +36,58 @@ public class Player {
     public static Integer playerAction(GameState state, int randomNumber) {
 
 
-        var us = state.players.stream().filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
+      var teamBetForTdd = state.players.stream()
+              .filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
         var faceCards = Set.of("A", "K", "J", "Q", "10");
 //        var communityCards = Set.of("10","9", "8", "7", "6", "5", "4", "3", "2");
 //
 
         var communityCards = state.community_cards;
-        if (us.hole_cards.stream()
+        if (teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("A")).toList().size() == 1) {
             return state.currentMaxBet() + (state.allBetsSum());
 
         }
 
-        if (us.hole_cards.stream()
+        if (teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .allMatch(o -> faceCards.contains(o))) {
             return state.currentMaxBet() + (state.allBetsSum());
 
         }
 
+        // post flop
 
-        boolean one_or_two_pairs = us.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> !communityCards.stream()
-                        .filter(card -> card.rank.equals(o))
-                        .toList().isEmpty()).toList().size() == 1;
-        if (one_or_two_pairs) {
-            return state.currentMaxBet() + (state.allBetsSum());
-        }
 
-//        community
+        Integer state1 = postFlopPlay(state, teamBetForTdd, communityCards);
+        if (state1 != null) return state1;
 
+
+// bluffing
 
         if (randomNumber >= 50) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
         return state.currentMaxBet(); // check
+    }
+
+    private static Integer postFlopPlay(GameState state, PlayerRecord us, List<PlayerRecord.Card> communityCards) {
+        Stream<String> currentCardRanks = us.hole_cards.stream()
+                .map(hand -> hand.rank);
+
+        var communityCardRanks = communityCards.stream()
+                .map(hand -> hand.rank).toList();
+
+        boolean one_or_two_pairs = currentCardRanks
+                .filter(o -> !communityCardRanks.stream()
+                        .filter(rank -> rank.equals(o))
+                        .toList().isEmpty()).toList().size() == 1;
+        if (one_or_two_pairs) {
+            return state.currentMaxBet() + (state.allBetsSum());
+        }
+        return null;
     }
 
     public static void showdown(JsonNode game) {
