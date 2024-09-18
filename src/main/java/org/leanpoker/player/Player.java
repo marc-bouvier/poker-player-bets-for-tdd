@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class Player {
@@ -15,7 +17,8 @@ public class Player {
     public static int betRequest(JsonNode request) {
         try {
             GameState state = mapper.readValue(request.toPrettyString(), GameState.class);
-            Integer x = playerAction(state, 49);
+            var randomNumber = new Random().nextInt(100);
+            Integer x = playerAction(state, randomNumber);
 
             if (x != null) return x;
 //            System.out.println("INFO: " + state);
