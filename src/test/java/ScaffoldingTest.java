@@ -3,6 +3,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.leanpoker.player.GameState;
+import org.leanpoker.player.Player;
+import org.leanpoker.player.PlayerRecord;
+import org.leanpoker.player.PlayerRecord.Card;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.leanpoker.player.Player.betRequest;
@@ -104,6 +110,30 @@ public class ScaffoldingTest {
         JsonNode request = mapper.readTree(bluffingRequest);
         assertThat(betRequest(request)).isEqualTo(25);
 
+
+    }
+
+
+    @Test
+    void go_all_in_with_kings() throws JsonProcessingException {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(0)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("K").setSuit("clubs"),
+                        new Card().setRank("K").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(10)
+                                .setStack(1000))
+        );
+
+        assertThat(Player.playerAction(game)).isEqualTo(1000);
 
     }
 

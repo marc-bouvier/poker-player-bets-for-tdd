@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Player {
 
+
     static final String VERSION = "Default Java folding player";
     private static ObjectMapper mapper = new ObjectMapper();
 
@@ -14,9 +15,10 @@ public class Player {
             GameState state = mapper.readValue(request.toPrettyString(), GameState.class);
             // detect aces
             Integer x = playerAction(state);
+
             if (x != null) return x;
             System.out.println("INFO: " + state);
-            return state.currentMaxBet() +( state.allBetsSum());
+            return state.currentMaxBet() + (state.allBetsSum());
         } catch (JsonProcessingException e) {
             System.out.println("ERROR: " + e);
         }
@@ -32,6 +34,12 @@ public class Player {
                 .map(hand -> hand.rank)
                 .allMatch(o -> o.equals("A"))) {
             return 1000;
+        }
+        if (us.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .allMatch(o -> o.equals("K"))) {
+            return 1000;
+
         }
         return null;
     }
