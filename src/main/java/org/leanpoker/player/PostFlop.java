@@ -5,6 +5,9 @@ import java.util.stream.Stream;
 
 public class PostFlop {
     static Integer postFlopPlay(GameState state, PlayerRecord us, List<PlayerRecord.Card> communityCards) {
+        if ((long) communityCards.size() == 0) {
+            return null;
+        }
         Stream<String> currentCardRanks = us.hole_cards.stream()
                 .map(hand -> hand.rank);
 

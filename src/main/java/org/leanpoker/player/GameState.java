@@ -8,7 +8,7 @@ public final class GameState {
     public List<PlayerRecord> players;
     public float small_blind;
     public float big_blind;
-    public float orbits;
+    public int orbits;
     public float dealer;
     public List<PlayerRecord.Card> community_cards;
     public float current_buy_in;
@@ -78,7 +78,7 @@ public final class GameState {
         return this;
     }
 
-    public GameState setOrbits(float orbits) {
+    public GameState setOrbits(int orbits) {
         this.orbits = orbits;
         return this;
     }

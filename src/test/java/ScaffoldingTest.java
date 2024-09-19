@@ -9,6 +9,7 @@ import org.leanpoker.player.Player;
 import org.leanpoker.player.PlayerRecord;
 import org.leanpoker.player.PlayerRecord.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -224,6 +225,30 @@ public class ScaffoldingTest {
         );
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(80);
+
+    }
+    @Test
+    void do_not_bluff_first_300_hands() {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("7").setSuit("clubs"),
+                        new Card().setRank("2").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000))
+        );
+        game.setCommunity_cards(new ArrayList<>());
+        game.setOrbits(99);
+
+        assertThat(Player.playerAction(game, 56)).isEqualTo(30);
 
     }
 
