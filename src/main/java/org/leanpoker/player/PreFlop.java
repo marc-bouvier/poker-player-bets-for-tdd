@@ -52,27 +52,33 @@ public class PreFlop {
         if (anyQueen && anyAce || anyKing && anyAce) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
         }
-        boolean queens = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("Q")).toList().size() == 2;
-        boolean kings = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("K")).toList().size() == 2;
-        boolean aces = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("A")).toList().size() == 2;
-        boolean jacks = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("J")).toList().size() == 2;
-        boolean tens = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("10")).toList().size() == 2;
-        boolean nines = teamBetForTdd.hole_cards.stream()
-                .map(hand -> hand.rank)
-                .filter(o -> o.equals("9")).toList().size() == 2;
-        if (aces || kings || queens || jacks || tens || nines) {
-            currentBet = state.currentMaxBet() + (state.allBetsSum());
-        }
+//        boolean queens = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("Q")).toList().size() == 2;
+//        boolean kings = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("K")).toList().size() == 2;
+//        boolean aces = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("A")).toList().size() == 2;
+//        boolean jacks = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("J")).toList().size() == 2;
+//        boolean tens = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("10")).toList().size() == 2;
+//        boolean nines = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("9")).toList().size() == 2;
+//        boolean eights = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("8")).toList().size() == 2;
+//        boolean sevens = teamBetForTdd.hole_cards.stream()
+//                .map(hand -> hand.rank)
+//                .filter(o -> o.equals("7")).toList().size() == 2;
+//        if (aces || kings || queens || jacks || tens || nines || eights || sevens) {
+//            currentBet = state.currentMaxBet() + (state.allBetsSum());
+//        }
         return currentBet;
     }
 }
