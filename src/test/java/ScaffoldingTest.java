@@ -395,32 +395,32 @@ public class ScaffoldingTest {
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(0);
     }
-//    @Test
-//    void fold_hands_we_do_not_want_postflop() {
-//        var game = new GameState();
-//        game.community_cards=List.of(
-//                new Card().setRank("Q").setSuit("clubs"),
-//                new Card().setRank("3").setSuit("clubs"),
-//                new Card().setRank("2").setSuit("clubs")
-//        );
-//        PlayerRecord us = new PlayerRecord()
-//                .setName("Bets for TDD")
-//                .setBet(35)
-//                .setStack(1000).setHole_cards(List.of(
-//                        new Card().setRank("k").setSuit("clubs"),
-//                        new Card().setRank("7").setSuit("diamonds")
-//                ));
-//        game.setPlayers(
-//                List.of(us
-//                        , new PlayerRecord()
-//                                .setName("other")
-//                                .setBet(115)
-//                                .setStack(1000))
-//        );
-//        game.setOrbits(24);
-//
-//        assertThat(Player.playerAction(game, 51)).isLessThan(115);
-//    }
+    @Test
+    void fold_hands_we_do_not_want_postflop() {
+        var game = new GameState();
+        game.community_cards=List.of(
+                new Card().setRank("Q").setSuit("clubs"),
+                new Card().setRank("3").setSuit("clubs"),
+                new Card().setRank("2").setSuit("clubs")
+        );
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(35)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("k").setSuit("clubs"),
+                        new Card().setRank("7").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(115)
+                                .setStack(1000))
+        );
+        game.setOrbits(24);
+
+        assertThat(Player.playerAction(game, 43)).isEqualTo(0);
+    }
 
 
     @Test
