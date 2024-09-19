@@ -11,7 +11,7 @@ public class PreFlop {
         // play good hands
         // any Ace
         Integer currentBet = null;
-        if (teamBetForTdd.hole_cards.stream()
+        if (state.currentMaxBet() < 105 && teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("A")).toList().size() == 1) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
@@ -25,7 +25,7 @@ public class PreFlop {
 
         }
         // any Queen
-        if (teamBetForTdd.hole_cards.stream()
+        if (state.currentMaxBet() < 35 && teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("Q")).toList().size() == 1) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
