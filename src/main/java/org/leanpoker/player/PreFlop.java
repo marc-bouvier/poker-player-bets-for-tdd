@@ -1,5 +1,7 @@
 package org.leanpoker.player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class PreFlop {
@@ -32,9 +34,22 @@ public class PreFlop {
         }
 
         // any facecard
-        if (teamBetForTdd.hole_cards.stream()
+        if (state.currentMaxBet() < 110 && teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .allMatch(o -> faceCards.contains(o))) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
+        }
+        // only continue with great hands
+        boolean anyQueen = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("Q")).toList().isEmpty();
+        boolean anyKing = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("K")).toList().isEmpty();
+        boolean anyAce = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("A")).toList().isEmpty();
+        if (anyQueen && anyAce || anyKing && anyAce) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
         }
 
