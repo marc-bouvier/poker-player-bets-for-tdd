@@ -248,7 +248,7 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
 
-        assertThat(Player.playerAction(game, 49)).isEqualTo(30);
+        assertThat(Player.playerAction(game, 19)).isEqualTo(30);
 
     }
 
