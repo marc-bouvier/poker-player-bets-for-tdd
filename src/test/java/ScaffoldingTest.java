@@ -90,7 +90,7 @@ public class ScaffoldingTest {
             "      \"name\": \"Skyjo\",\n" +
             "      \"stack\": 989,\n" +
             "      \"status\": \"active\",\n" +
-            "      \"bet\": 10,\n" +
+            "      \"bet\": 120,\n" +
             "      \"time_used\": 335958,\n" +
             "      \"version\": \"log requests\",\n" +
             "      \"id\": 0\n" +
@@ -111,7 +111,7 @@ public class ScaffoldingTest {
             "      \"bet\": 0,\n" +
             "      \"hole_cards\": [\n" +
             "        {\n" +
-            "          \"rank\": \"7\",\n" +
+            "          \"rank\": \"A\",\n" +
             "          \"suit\": \"clubs\"\n" +
             "        },\n" +
             "        {\n" +
