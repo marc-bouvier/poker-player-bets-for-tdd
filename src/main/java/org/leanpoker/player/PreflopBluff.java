@@ -9,13 +9,13 @@ public class PreflopBluff {
         if (state.currentMaxBet() > state.ourBetSize() && state.orbits < 25) {
             return 0;
         }
-        if (state.currentMaxBet() < 35 && randomNumber >= 90) {
+        if (state.currentMaxBet() < 35 && randomNumber >= BluffingConstants.smallPotsBluff) {
             return state.currentMaxBet() + state.allBetsSum();
         }
-        if (state.currentMaxBet() > 35 && state.currentMaxBet() < 105 && randomNumber >= 85) {
+        if (state.currentMaxBet() > 35 && state.currentMaxBet() < 105 && randomNumber >= BluffingConstants.mediumPotsBluff) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
-        if (state.currentMaxBet() > 100 && state.currentMaxBet() < 205 && randomNumber >= 50) {
+        if (state.currentMaxBet() > 100 && state.currentMaxBet() < 205 && randomNumber >= BluffingConstants.largePotsBluff) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
         // fold bad hands
