@@ -229,7 +229,7 @@ public class ScaffoldingTest {
 
     }
     @Test
-    void do_not_bluff_first_300_hands() {
+    void fold_first_300_hands() {
 
         var game = new GameState();
         PlayerRecord us = new PlayerRecord()
@@ -249,7 +249,7 @@ public class ScaffoldingTest {
         game.setCommunity_cards(new ArrayList<>());
         game.setOrbits(23);
 
-        assertThat(Player.playerAction(game, 90)).isEqualTo(30);
+        assertThat(Player.playerAction(game, 90)).isEqualTo(0);
 
     }
 

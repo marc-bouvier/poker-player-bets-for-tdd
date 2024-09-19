@@ -5,9 +5,9 @@ public class PreflopBluff {
         if ((long) state.community_cards.size() > 0) {
             return null;
         }
-//        if (state.orbits < 25) {
-//            return state.currentMaxBet();
-//        }
+        if (state.currentMaxBet() > state.ourBetSize() && state.orbits < 25) {
+            return 0;
+        }
         if (state.currentMaxBet() < 35 && randomNumber >= 90) {
             return state.currentMaxBet() + state.allBetsSum();
         }
