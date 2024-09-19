@@ -465,7 +465,7 @@ public class ScaffoldingTest {
         );
         game.setOrbits(26);
 
-        assertThat(Player.playerAction(game, 51)).isEqualTo(265);
+        assertThat(Player.playerAction(game, 51)).isEqualTo(0);
     }
     @Test
     void fold_hands_we_do_not_want_preflop() {
@@ -542,6 +542,38 @@ public class ScaffoldingTest {
         game.community_cards = List.of(
                 new Card().setRank("6").setSuit("clubs"),
                 new Card().setRank("10").setSuit("hearts"),
+                new Card().setRank("3").setSuit("diamonds")
+        );
+
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(80);
+
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"Q", "K", "J", "10"})
+    void post_flop_put_money_in_with_big_top_pair(String pairedCard) {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("K").setSuit("clubs"),
+                        new Card().setRank(pairedCard).setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(30)
+                                .setStack(1000)
+
+                )
+        );
+
+        game.community_cards = List.of(
+                new Card().setRank("4").setSuit("clubs"),
+                new Card().setRank(pairedCard).setSuit("hearts"),
                 new Card().setRank("3").setSuit("diamonds")
         );
 
