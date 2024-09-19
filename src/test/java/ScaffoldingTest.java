@@ -167,7 +167,7 @@ public class ScaffoldingTest {
 
 
     @Test
-    void always_at_least_check() throws JsonProcessingException {
+    void fold_when_needed() throws JsonProcessingException {
 
 
         ObjectMapper mapper = new ObjectMapper();
@@ -175,7 +175,6 @@ public class ScaffoldingTest {
 
         JsonNode request = mapper.readTree(bluffingRequest);
         assertThat(betRequest(request)).isGreaterThanOrEqualTo(10);
-
 
     }
 
