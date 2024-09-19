@@ -31,8 +31,6 @@ public class Player {
     }
 
     public static Integer playerAction(GameState state, int randomNumber) {
-
-
         var teamBetForTdd = state.players.stream()
                 .filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
                 .findFirst().get();
@@ -43,18 +41,30 @@ public class Player {
         var communityCards = state.community_cards;
 
         Integer currentBet = PreFlop.preFlop(state, teamBetForTdd, faceCards);
-        if (currentBet != null) return currentBet;
+        if (currentBet != null) {
+            System.out.println(":currentBet: " + currentBet);
+            return currentBet;
+        }
         Integer preflopBluff = PreflopBluff.bluff(state, randomNumber);
-        if (preflopBluff != null) return preflopBluff;
+        if (preflopBluff != null) {
+            System.out.println(":preflopBluff: " + preflopBluff);
+            return preflopBluff;
+        }
 
         // post flop
         Integer state1 = PostFlop.postFlopPlay(state, teamBetForTdd, communityCards);
-        if (state1 != null) return state1;
+        if (state1 != null) {
+            System.out.println("state1:" + state1);
+            return state1;
+        }
 
         // bluffing
 
         Integer state2 = Bluff.bluff(state, randomNumber);
-        if (state2 != null) return state2;
+        if (state2 != null) {
+            System.out.println("state2:" + state2);
+            return state2;
+        }
 
         return Check.check(state); // check
     }

@@ -31,6 +31,11 @@ public final class GameState {
 //                .filter(playerRecord -> !playerRecord.name.equals("Bets for TDD"))
                 .mapToInt(playerRecord -> playerRecord.bet).sum();
     }
+    public int ourBetSize() {
+        return players.stream()
+                .filter(playerRecord -> playerRecord.name.equals("Bets for TDD"))
+                .mapToInt(playerRecord -> playerRecord.bet).findFirst().orElse(30);
+    }
 
 
 

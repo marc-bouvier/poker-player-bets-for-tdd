@@ -8,6 +8,7 @@ public class PreFlop {
             return null;
         }
 
+        // play good hands
         // any Ace
         Integer currentBet = null;
         if (teamBetForTdd.hole_cards.stream()
@@ -17,7 +18,7 @@ public class PreFlop {
 
         }
         // any King
-        if (teamBetForTdd.hole_cards.stream()
+        if (state.currentMaxBet() < 35 && teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("K")).toList().size() == 1) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());

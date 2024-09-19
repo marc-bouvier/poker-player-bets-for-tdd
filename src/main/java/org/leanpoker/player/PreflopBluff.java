@@ -5,6 +5,11 @@ public class PreflopBluff {
         if ((long) state.community_cards.size() > 0) {
             return null;
         }
+        // current max bet = 30
+        // our current bet = 20
+        if (state.currentMaxBet() > state.ourBetSize()) {
+            return state.ourBetSize();
+        }
         if (state.orbits < 25) {
             return state.currentMaxBet();
         }
