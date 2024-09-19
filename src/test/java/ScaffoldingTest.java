@@ -326,6 +326,52 @@ public class ScaffoldingTest {
         assertThat(Player.playerAction(game, 91)).isEqualTo(25);
 
     }
+    @Test
+    void does_bluff_preflop_in_bigger_pot() {
+
+        var game = new GameState();
+        game.community_cards=List.of();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(35)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("2").setSuit("clubs"),
+                        new Card().setRank("7").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(50)
+                                .setStack(1000))
+        );
+        game.setOrbits(26);
+
+        assertThat(Player.playerAction(game, 91)).isEqualTo(135);
+    }
+    @Test
+    void does_bluff_preflop_in_even_bigger_pot() {
+
+        var game = new GameState();
+        game.community_cards=List.of();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(35)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("2").setSuit("clubs"),
+                        new Card().setRank("7").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(115)
+                                .setStack(1000))
+        );
+        game.setOrbits(26);
+
+        assertThat(Player.playerAction(game, 51)).isEqualTo(265);
+    }
 
 
     @Test

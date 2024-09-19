@@ -14,7 +14,7 @@ public class PreflopBluff {
         if (state.currentMaxBet() > 35 && state.currentMaxBet() < 105 && randomNumber >= 85) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
-        if (state.currentMaxBet() > 105 && state.currentMaxBet() < 145 && randomNumber >= 50) {
+        if (state.currentMaxBet() > 100 && state.currentMaxBet() < 205 && randomNumber >= 50) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
         return state.currentMaxBet();
