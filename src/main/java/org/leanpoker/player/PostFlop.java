@@ -14,11 +14,11 @@ public class PostFlop {
         var communityCardRanks = communityCards.stream()
                 .map(hand -> hand.rank).toList();
 
-        boolean one_or_two_pairs = currentCardRanks
+        boolean two_pairs_only = currentCardRanks
                 .filter(o -> !communityCardRanks.stream()
                         .filter(rank -> rank.equals(o))
-                        .toList().isEmpty()).toList().size() == 1;
-        if (one_or_two_pairs) {
+                        .toList().isEmpty()).toList().size() == 2;
+        if (two_pairs_only) {
             return state.currentMaxBet() + (state.allBetsSum());
         }
         return null;

@@ -189,7 +189,7 @@ public class ScaffoldingTest {
                 .setBet(20)
                 .setStack(1000).setHole_cards(List.of(
                         new Card().setRank(cardOneAndTwo).setSuit("clubs"),
-                        new Card().setRank(cardOneAndTwo).setSuit("diamonds")
+                        new Card().setRank("10").setSuit("diamonds")
                 ));
         game.setPlayers(
                 List.of(us
@@ -526,7 +526,7 @@ public class ScaffoldingTest {
                 .setName("Bets for TDD")
                 .setBet(20)
                 .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("8").setSuit("clubs"),
+                        new Card().setRank("6").setSuit("clubs"),
                         new Card().setRank("10").setSuit("diamonds")
                 ));
         game.setPlayers(
