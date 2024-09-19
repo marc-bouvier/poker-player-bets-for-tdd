@@ -189,8 +189,8 @@ public class ScaffoldingTest {
                 .setName("Bets for TDD")
                 .setBet(20)
                 .setStack(1000).setHole_cards(List.of(
-                        new Card().setRank("Q").setSuit("clubs"),
-                        new Card().setRank("Q").setSuit("diamonds")
+                        new Card().setRank(cardOneAndTwo).setSuit("clubs"),
+                        new Card().setRank(cardOneAndTwo).setSuit("diamonds")
                 ));
         game.setPlayers(
                 List.of(us
@@ -199,6 +199,7 @@ public class ScaffoldingTest {
                                 .setBet(30)
                                 .setStack(1000))
         );
+        game.setCommunity_cards(new ArrayList<>());
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
@@ -223,6 +224,7 @@ public class ScaffoldingTest {
                                 .setBet(30)
                                 .setStack(1000))
         );
+        game.setCommunity_cards(new ArrayList<>());
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
@@ -246,9 +248,9 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
         game.setCommunity_cards(new ArrayList<>());
-        game.setOrbits(99);
+        game.setOrbits(23);
 
-        assertThat(Player.playerAction(game, 56)).isEqualTo(30);
+        assertThat(Player.playerAction(game, 90)).isEqualTo(30);
 
     }
 
@@ -331,10 +333,12 @@ public class ScaffoldingTest {
                                 .setBet(30)
                                 .setStack(1000))
         );
+        game.setCommunity_cards(new ArrayList<>());
 
         assertThat(Player.playerAction(game, 49)).isEqualTo(80);
 
     }
+
 
     // Pre flop
 

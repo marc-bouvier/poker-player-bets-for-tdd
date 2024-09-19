@@ -44,6 +44,8 @@ public class Player {
 
         Integer currentBet = PreFlop.preFlop(state, teamBetForTdd, faceCards);
         if (currentBet != null) return currentBet;
+        Integer preflopBluff = PreflopBluff.bluff(state, randomNumber);
+        if (preflopBluff != null) return preflopBluff;
 
         // post flop
         Integer state1 = PostFlop.postFlopPlay(state, teamBetForTdd, communityCards);

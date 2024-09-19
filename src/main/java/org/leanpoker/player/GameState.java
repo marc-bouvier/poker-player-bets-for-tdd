@@ -1,5 +1,6 @@
 package org.leanpoker.player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class GameState {
