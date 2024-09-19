@@ -8,6 +8,7 @@ public class PreFlop {
             return null;
         }
 
+        // any Ace
         Integer currentBet = null;
         if (teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
@@ -15,7 +16,21 @@ public class PreFlop {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
 
         }
+        // any King
+        if (teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("K")).toList().size() == 1) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
 
+        }
+        // any Queen
+        if (teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("Q")).toList().size() == 1) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
+        }
+
+        // any facecard
         if (teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .allMatch(o -> faceCards.contains(o))) {

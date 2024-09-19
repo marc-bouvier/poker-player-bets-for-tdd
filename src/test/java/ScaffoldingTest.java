@@ -256,7 +256,7 @@ public class ScaffoldingTest {
 
 
     @Test
-    void checks_with_k_7() {
+    void bets_with_k_7() {
 
         var game = new GameState();
         game.community_cards=List.of();
@@ -275,7 +275,55 @@ public class ScaffoldingTest {
                                 .setStack(1000))
         );
 
-        assertThat(Player.playerAction(game, 19)).isEqualTo(30);
+        assertThat(Player.playerAction(game, 19)).isEqualTo(80);
+
+    }
+    @Test
+    void does_not_bluff_preflop_on_bad_roll() {
+
+        var game = new GameState();
+        game.community_cards=List.of();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(5)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("2").setSuit("clubs"),
+                        new Card().setRank("7").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(10)
+                                .setStack(1000))
+        );
+        game.setOrbits(26);
+
+        assertThat(Player.playerAction(game, 89)).isEqualTo(10);
+
+    }
+    @Test
+    void does_bluff_preflop_on_bad_roll() {
+
+        var game = new GameState();
+        game.community_cards=List.of();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(5)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank("2").setSuit("clubs"),
+                        new Card().setRank("7").setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(10)
+                                .setStack(1000))
+        );
+        game.setOrbits(26);
+
+        assertThat(Player.playerAction(game, 91)).isEqualTo(25);
 
     }
 
