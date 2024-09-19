@@ -550,7 +550,7 @@ public class ScaffoldingTest {
 
     }
     @ParameterizedTest
-    @ValueSource(strings = {"Q", "K", "J", "10"})
+    @ValueSource(strings = {"A", "Q", "K", "J", "10"})
     void post_flop_put_money_in_with_big_top_pair(String pairedCard) {
 
         var game = new GameState();
