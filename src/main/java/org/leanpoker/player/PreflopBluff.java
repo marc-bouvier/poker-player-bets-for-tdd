@@ -5,14 +5,9 @@ public class PreflopBluff {
         if ((long) state.community_cards.size() > 0) {
             return null;
         }
-        // current max bet = 30
-        // our current bet = 20
-        if (state.currentMaxBet() > state.ourBetSize()) {
-            return state.ourBetSize();
-        }
-        if (state.orbits < 25) {
-            return state.currentMaxBet();
-        }
+//        if (state.orbits < 25) {
+//            return state.currentMaxBet();
+//        }
         if (state.currentMaxBet() < 35 && randomNumber >= 90) {
             return state.currentMaxBet() + state.allBetsSum();
         }
@@ -21,6 +16,10 @@ public class PreflopBluff {
         }
         if (state.currentMaxBet() > 100 && state.currentMaxBet() < 205 && randomNumber >= 50) {
             return state.currentMaxBet() + (state.allBetsSum());
+        }
+        // fold bad hands
+        if (state.currentMaxBet() > state.ourBetSize()) {
+            return 0;
         }
         return state.currentMaxBet();
     }
