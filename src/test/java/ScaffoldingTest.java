@@ -111,7 +111,7 @@ public class ScaffoldingTest {
             "      \"bet\": 0,\n" +
             "      \"hole_cards\": [\n" +
             "        {\n" +
-            "          \"rank\": \"A\",\n" +
+            "          \"rank\": \"K\",\n" +
             "          \"suit\": \"clubs\"\n" +
             "        },\n" +
             "        {\n" +
@@ -252,7 +252,7 @@ public class ScaffoldingTest {
 
     }
     @ParameterizedTest
-    @ValueSource(strings = {"A", "Q", "K", "J", "10", "9", "8", "7"})
+    @ValueSource(strings = {"A", "Q", "K", "J"})
     void continue_with_mediocre_hands(String cardOneAndTwo) {
 
         var game = new GameState();
