@@ -174,7 +174,7 @@ public class ScaffoldingTest {
 
 
         JsonNode request = mapper.readTree(bluffingRequest);
-        assertThat(betRequest(request)).isGreaterThanOrEqualTo(10);
+        assertThat(betRequest(request)).isEqualTo(0);
 
     }
 
@@ -278,7 +278,7 @@ public class ScaffoldingTest {
 
     }
     @Test
-    void does_not_bluff_preflop_on_bad_roll() {
+    public void fold_on_bad_roll() {
 
         var game = new GameState();
         game.community_cards=List.of();
@@ -298,7 +298,7 @@ public class ScaffoldingTest {
         );
         game.setOrbits(26);
 
-        assertThat(Player.playerAction(game, 89)).isEqualTo(10);
+        assertThat(Player.playerAction(game, 89)).isEqualTo(0);
 
     }
     @Test
