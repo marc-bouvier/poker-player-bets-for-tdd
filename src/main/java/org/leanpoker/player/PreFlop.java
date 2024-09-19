@@ -76,7 +76,7 @@ public class PreFlop {
         boolean sevens = teamBetForTdd.hole_cards.stream()
                 .map(hand -> hand.rank)
                 .filter(o -> o.equals("7")).toList().size() == 2;
-        if (aces || kings || queens || jacks) {
+        if (aces || kings || queens || jacks || tens) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
         }
         return currentBet;
