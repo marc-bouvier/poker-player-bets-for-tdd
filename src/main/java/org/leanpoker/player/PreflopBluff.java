@@ -1,5 +1,6 @@
 package org.leanpoker.player;
 
+// configure randomness
 public class PreflopBluff {
     static Integer bluff(GameState state, int randomNumber) {
         if ((long) state.community_cards.size() > 0) {

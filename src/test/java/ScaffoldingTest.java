@@ -252,6 +252,30 @@ public class ScaffoldingTest {
 
     }
     @ParameterizedTest
+    @ValueSource(strings = {"A", "Q", "K", "J", "10", "9", "8", "7"})
+    void continue_with_mediocre_hands(String cardOneAndTwo) {
+
+        var game = new GameState();
+        PlayerRecord us = new PlayerRecord()
+                .setName("Bets for TDD")
+                .setBet(20)
+                .setStack(1000).setHole_cards(List.of(
+                        new Card().setRank(cardOneAndTwo).setSuit("clubs"),
+                        new Card().setRank(cardOneAndTwo).setSuit("diamonds")
+                ));
+        game.setPlayers(
+                List.of(us
+                        , new PlayerRecord()
+                                .setName("other")
+                                .setBet(130)
+                                .setStack(1000))
+        );
+        game.setCommunity_cards(new ArrayList<>());
+
+        assertThat(Player.playerAction(game, 49)).isEqualTo(280);
+
+    }
+    @ParameterizedTest
     @ValueSource(strings = {"Q", "K", "J", "10"})
     void continue_with_great_hands_pairs(String cardOneAndTwo) {
 

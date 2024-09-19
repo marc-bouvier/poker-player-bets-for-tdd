@@ -52,7 +52,18 @@ public class PreFlop {
         if (anyQueen && anyAce || anyKing && anyAce) {
             currentBet = state.currentMaxBet() + (state.allBetsSum());
         }
-
+        boolean queens = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("Q")).toList().isEmpty();
+        boolean kings = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("K")).toList().isEmpty();
+        boolean aces = !teamBetForTdd.hole_cards.stream()
+                .map(hand -> hand.rank)
+                .filter(o -> o.equals("A")).toList().isEmpty();
+        if (aces || kings || queens) {
+            currentBet = state.currentMaxBet() + (state.allBetsSum());
+        }
         return currentBet;
     }
 }
